@@ -14,7 +14,7 @@ const CountingPage = () => {
   }, []);
 
   useEffect(() => {
-    // Memantau perbuhan state
+    // Memantau perubahan state
     console.log(`counting saat ini : ${count}`);
     if (count < 1) {
       alert("Counting kurang dari 1");
