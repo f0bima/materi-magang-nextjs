@@ -25,3 +25,10 @@ cukup 1 digit saja perangka
 custom props
 render array
 reusable button
+
+## Tugas Kedua
+
+Buat form,
+setelah isi form, hasil dari form tersebut teman teman simapan
+ditampilkan dihalaman
+nilai yang sudah tersimpan bisa di delete, bisa edit
