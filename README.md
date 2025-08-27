@@ -21,3 +21,7 @@ ketika tombol =(sama dengan) diklik muncul hasilnya
 cukup 1 digit saja perangka
 
 ```
+
+custom props
+render array
+reusable button
