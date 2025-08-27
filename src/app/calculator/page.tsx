@@ -1,6 +1,6 @@
 "use client";
 import CalculatorButton from "@/app/calculator/components/CalculatorButton";
-import React, { useEffect, useState } from "react";
+import { useMemo, useState } from "react";
 
 type TOperator = "+" | "-";
 
@@ -10,51 +10,89 @@ const Page = () => {
   const [result, setResult] = useState<number>();
   const [operator, setOperator] = useState<TOperator>();
 
-  useEffect(() => {
-    console.log(digit1, digit2);
-  }, [digit1, digit2]);
+  // const [resultScreen, setResultScreen] = useState<string>();
+
+  const onDigitClick = (value: number) => {
+    const reset = () => {
+      setOperator(undefined);
+      setDigit2(undefined);
+      setResult(undefined);
+    };
+
+    if (result !== undefined) {
+      reset();
+      setDigit1(value);
+      return;
+    }
+    if (!operator) return setDigit1(value);
+    setDigit2(value);
+  };
+
+  const onResultClick = () => {
+    if (!digit1 || !digit2 || !operator) return;
+
+    let _result = 0;
+    if (operator === "+") {
+      _result = digit1 + digit2;
+    } else {
+      _result = digit1 - digit2;
+    }
+    setResult(_result);
+  };
+
+  const resultScreen = useMemo(() => {
+    const _digit1 = digit1 === undefined ? "" : digit1;
+    const _digit2 = digit2 === undefined ? "" : digit2;
+    const _operator = operator === undefined ? "" : operator;
+    const _result = result === undefined ? "" : `= ${result}`;
+
+    const _resultScreen = `${_digit1} ${_operator} ${_digit2} ${_result}`;
+    return _resultScreen;
+  }, [digit1, digit2, operator, result]);
+
+  // useEffect(() => {
+  //   const _digit1 = digit1 === undefined ? "" : digit1;
+  //   const _digit2 = digit2 === undefined ? "" : digit2;
+  //   const _operator = operator === undefined ? "" : operator;
+  //   const _result = result === undefined ? "" : `= ${result}`;
+
+  //   const _resultScreen = `${_digit1} ${_operator} ${_digit2} ${_result}`;
+  //   setResultScreen(_resultScreen);
+  // }, [digit1, digit2, operator, result]);
 
   return (
     <main className="bg-white text-black w-full h-screen flex justify-center items-center">
-      <div className="grid grid-cols-3 gap-2">
-        {[...Array(9)].map((_, i) => (
-          <CalculatorButton
-            key={i + 1}
-            onClick={() => {
-              const currentDigit = i + 1;
-              if (operator === undefined) return setDigit1(currentDigit);
-              setDigit2(currentDigit);
-            }}
-            className="bg-slate-400"
-          >
-            {i + 1}
-          </CalculatorButton>
-        ))}
+      <div className="grid grid-cols-3 gap-2 bg-slate-300 p-4 rounded-2xl shadow-2xl">
+        <div className="h-20 bg-black/80 col-span-3 rounded-2xl place-content-end flex items-center text-white font-bold p-4">
+          {resultScreen}
+        </div>
+        {[...Array(9)].map((_, i) => {
+          const _digit = i + 1;
+          return (
+            <CalculatorButton
+              key={_digit}
+              onClick={() => onDigitClick(_digit)}
+              className="bg-slate-400"
+            >
+              {_digit}
+            </CalculatorButton>
+          );
+        })}
 
         <CalculatorButton
-          onClick={() => {
-            console.log("+ clicked");
-            setOperator("+");
-          }}
+          onClick={() => setOperator("+")}
           className="bg-blue-300"
         >
           +
         </CalculatorButton>
 
         <CalculatorButton
-          onClick={() => {
-            setOperator("-");
-          }}
+          onClick={() => setOperator("-")}
           className="bg-red-300"
         >
           -
         </CalculatorButton>
-        <CalculatorButton
-          onClick={() => {
-            setOperator("-");
-          }}
-          className="bg-green-400"
-        >
+        <CalculatorButton onClick={onResultClick} className="bg-green-400">
           =
         </CalculatorButton>
       </div>

@@ -7,7 +7,7 @@ const CalculatorButton = forwardRef<HTMLButtonElement, Props>(
     return (
       <button
         ref={ref}
-        className={`w-20 h-20  text-2xl rounded-2xl ${className}`}
+        className={`w-20 h-20  text-2xl rounded-2xl cursor-pointer hover:bg-red-300 hover:text-white ${className}`}
         {...props}
       />
     );
