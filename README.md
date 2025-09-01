@@ -40,3 +40,13 @@ git add .
 git commit -m "first commit"
 git push -u origin main
 ```
+
+## Tugas Kedua
+
+- Home page di tampilkan link menuju halaman Tugas
+  - Calculator
+  - form
+  - Get Products
+  - Detail Products
+
+https://docs.google.com/forms/d/e/1FAIpQLSc40CVp5iuqJPt8RG80rxW7L1MTOFCFqmeZQUjFkIIqX5VHsQ/viewform?usp=dialog
