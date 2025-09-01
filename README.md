@@ -32,3 +32,11 @@ Buat form,
 setelah isi form, hasil dari form tersebut teman teman simapan
 ditampilkan dihalaman
 nilai yang sudah tersimpan bisa di delete, bisa edit
+
+```
+git remote add origin <remote repo url>
+git branch -M main
+git add .
+git commit -m "first commit"
+git push -u origin main
+```
